@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "database-ui"
+    }
+  },
+  "defaultProject": "database-ui",
+  "cli": {
+    "analytics": false
+  }
 }
