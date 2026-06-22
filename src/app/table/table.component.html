@@ -22,18 +22,19 @@
             <th class="col-type">Data Type</th>
             <th class="col-collation">Nullable</th>
             <th class="col-attributes">Max Length</th>
+            <th class="col-action">Actions</th>
           </tr>
         </thead>
-        <!-- <tbody>
+        <tbody>
           <tr *ngFor="let col of structure">
             <td class="col-num">
               <input type="checkbox" class="row-checkbox" [(ngModel)]="col.selected">
             </td>
-            <td class="col-name">{{ col.name }}</td>
-            <td class="col-type"><span class="type-badge">{{ col.type }}</span></td>
-            <td class="col-collation">{{ col.collation }}</td>
-            <td class="col-attributes">{{ col.attributes }}</td>
-            <td class="col-null">
+            <td class="col-name">{{ col.column_name }}</td>
+            <td class="col-type"><span class="type-badge">{{ col.data_type }}</span></td>
+            <td class="col-collation">{{ col.is_nullable ? 'YES' : 'NO' }}</td>
+            <td class="col-attributes">{{ col.max_length }}</td>
+            <!-- <td class="col-null">
               <span class="null-icon" [title]="col.null === 'NO' ? 'Not NULL' : 'NULL'">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
                   <circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/>
@@ -41,7 +42,7 @@
               </span>
             </td>
             <td class="col-default">{{ col.default }}</td>
-            <td class="col-extra">{{ col.extra }}</td>
+            <td class="col-extra">{{ col.extra }}</td> -->
             <td class="col-action">
               <div class="action-links">
                 <button class="action-link edit" (click)="openEditModal(col)">
@@ -63,7 +64,7 @@
               </div>
             </td>
           </tr>
-        </tbody> -->
+        </tbody>
       </table>
     </div>
 
@@ -106,15 +107,15 @@
     <div class="table-wrapper">
       <table class="data-table">
         <thead>
-          <tr *ngIf="dataColumns.length">
+          <tr *ngIf="columns.length">
             <th><input type="checkbox" class="row-checkbox" (change)="toggleSelectAllData($event.target.checked, paginatedData)"></th>
-            <th *ngFor="let colName of dataColumns">{{ colName }}</th>
+            <th *ngFor="let col of columns">{{ col.column_name }}</th>
             <th class="col-action">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngIf="dataColumns.length === 0">
-            <td colspan="100" style="text-align:center;padding:40px;color:var(--on-surface-variant)">
+            <td colspan="100" style="padding:40px;color:var(--on-surface-variant)">
               No data available for this table
             </td>
           </tr>
