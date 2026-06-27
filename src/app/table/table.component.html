@@ -28,7 +28,7 @@
         <tbody>
           <tr *ngFor="let col of structure">
             <td class="col-num">
-              <input type="checkbox" class="row-checkbox" [(ngModel)]="col.selected">
+              <input type="checkbox" class="row-checkbox">
             </td>
             <td class="col-name">{{ col.column_name }}</td>
             <td class="col-type"><span class="type-badge">{{ col.data_type }}</span></td>
@@ -99,7 +99,7 @@
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input type="text" placeholder="Search in table..." [(ngModel)]="tableSearchQuery" >
+          <input type="text" placeholder="Search in table..."  >
           <button class="search-clear" >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -146,7 +146,7 @@
             </td>
           </tr>
           <tr *ngFor="let row of paginatedData">
-            <td><input type="checkbox" class="row-checkbox" [(ngModel)]="row.selected"></td>
+            <td><input type="checkbox" class="row-checkbox"></td>
             <td *ngFor="let colName of dataColumns">{{ row[colName] }}</td>
             <td class="col-action">
               <div class="action-links">
@@ -207,34 +207,34 @@
       <form (ngSubmit)="saveEditModal()">
         <div class="form-group">
           <label for="edit-name">Name</label>
-          <input type="text" id="edit-name" name="name" [(ngModel)]="editingColumn.name" required>
+          <input type="text" id="edit-name" name="name"  required>
         </div>
         <div class="form-group">
           <label for="edit-type">Type</label>
-          <input type="text" id="edit-type" name="type" [(ngModel)]="editingColumn.type" required>
+          <input type="text" id="edit-type" name="type"  required>
         </div>
         <div class="form-group">
           <label for="edit-collation">Collation</label>
-          <input type="text" id="edit-collation" name="collation" [(ngModel)]="editingColumn.collation">
+          <input type="text" id="edit-collation" name="collation" >
         </div>
         <div class="form-group">
           <label for="edit-attributes">Attributes</label>
-          <input type="text" id="edit-attributes" name="attributes" [(ngModel)]="editingColumn.attributes">
+          <input type="text" id="edit-attributes" name="attributes" >
         </div>
         <div class="form-group">
           <label for="edit-null">Null</label>
-          <select id="edit-null" name="null" [(ngModel)]="editingColumn.null">
+          <select id="edit-null" name="null" >
             <option value="NO">NO</option>
             <option value="YES">YES</option>
           </select>
         </div>
         <div class="form-group">
           <label for="edit-default">Default</label>
-          <input type="text" id="edit-default" name="default" [(ngModel)]="editingColumn.default">
+          <input type="text" id="edit-default" name="default">
         </div>
         <div class="form-group">
           <label for="edit-extra">Extra</label>
-          <input type="text" id="edit-extra" name="extra" [(ngModel)]="editingColumn.extra">
+          <input type="text" id="edit-extra" name="extra">
         </div>
       </form>
     </div>
