@@ -1,5 +1,5 @@
 <div class="app-container">
-  <app-header [currentView]="currentView" (viewChange)="setView($event)"></app-header>
+  <app-header [databaseBusiness]="databaseBusiness" [currentView]="currentView" (viewChange)="setView($event)"></app-header>
 
   <div class="main-layout">
     <app-sidebar [databaseData]="databaseData" [currentDatabase]="currentDatabase" [currentTable]="currentTable"
@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <app-table [id]="currentId" [currentTable]="currentTable" [view]="currentView" [structure]="currentStructure" [data]="currentData"
+      <app-table [id]="currentId" [currentTable]="currentTable" [view]="currentView" [data]="currentData"
         (structureChange)="onStructureChange($event)" (dataChange)="onDataChange($event)" (toast)="onToast($event)">
       </app-table>
     </main>

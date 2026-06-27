@@ -12,9 +12,11 @@ export class SidebarComponent {
   @Input() currentTableId: number | null = null;  // table_id
   @Input() open = false;
 
-  @Output() tableSelect = new EventEmitter<{ database: string; table: string, id: number  }>();
+  @Output() tableSelect = new EventEmitter<{ database: string; table: string, id: number }>();
   @Output() closeSidebar = new EventEmitter<void>();
   @Output() toggleSidebar = new EventEmitter<void>();
+
+  tableSearchQuery = '';
 
   expandedDatabases: Set<string> = new Set();
 
@@ -71,5 +73,25 @@ export class SidebarComponent {
 
   onToggle(): void {
     this.toggleSidebar.emit();
+  }
+
+
+  onTableSearch() {
+    // The getFilteredTables method handles the filtering
+  }
+
+  clearTableSearch() {
+    this.tableSearchQuery = '';
+  }
+
+  getFilteredTables(dbName: string) {
+    const tables = this.getTables(dbName);
+    if (!this.tableSearchQuery) {
+      return tables;
+    }
+    const query = this.tableSearchQuery.toLowerCase();
+    return tables.filter(item =>
+      item.table_name.toLowerCase().includes(query)
+    );
   }
 }
