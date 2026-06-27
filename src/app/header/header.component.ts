@@ -3,23 +3,27 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html'
-  // No styleUrls here — all visual styles live in the global style.css
-  // (see README: add it to the "styles" array in angular.json).
 })
 export class HeaderComponent {
   @Input() databaseBusiness: any[] = [];
   @Input() currentView: 'structure' | 'data' = 'structure';
   @Output() viewChange = new EventEmitter<'structure' | 'data'>();
+  @Output() businessSelect = new EventEmitter<any>(); // <-- NEW: Emit selected business
 
   dbDropdownOpen = false;
   businessSearchQuery = '';
   filteredBusinesses: any[] = [];
   currentBusinessName: string = '';
+  selectedBusinessId: number | null = null; // <-- NEW: Track selected business
 
   ngOnChanges() {
     this.filteredBusinesses = [...this.databaseBusiness];
     if (this.databaseBusiness.length > 0) {
-      this.currentBusinessName = this.databaseBusiness[0].name;
+      // Only set default if nothing selected yet
+      if (!this.selectedBusinessId) {
+        this.currentBusinessName = this.databaseBusiness[0].name;
+        this.selectedBusinessId = this.databaseBusiness[0].id;
+      }
     }
   }
 
@@ -42,6 +46,14 @@ export class HeaderComponent {
     }
   }
 
+  // NEW: Select a business
+  selectBusiness(business: any) {
+    this.selectedBusinessId = business.id;
+    this.currentBusinessName = business.name;
+    this.dbDropdownOpen = false;
+    this.businessSelect.emit(business); // Emit to parent
+  }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
@@ -49,8 +61,6 @@ export class HeaderComponent {
       this.dbDropdownOpen = false;
     }
   }
-
-
 
   selectView(view: 'structure' | 'data'): void {
     this.viewChange.emit(view);

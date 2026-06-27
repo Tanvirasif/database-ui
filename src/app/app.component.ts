@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ColumnStructure, DatabaseInfo, DataRow } from './models';
 import { DATABASES, STRUCTURES, TABLE_DATA } from './mock-data';
 
+
 interface Toast {
   id: number;
   message: string;
